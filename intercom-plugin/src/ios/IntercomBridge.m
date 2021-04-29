@@ -161,6 +161,7 @@
 
 - (void)sendPushTokenToIntercom:(CDVInvokedUrlCommand*)command {
   NSLog(@"[Intercom-Cordova] INFO - sendPushTokenToIntercom called");
+    [self sendSuccess:command];
 }
 
 - (void)displayCarousel:(CDVInvokedUrlCommand*)command {

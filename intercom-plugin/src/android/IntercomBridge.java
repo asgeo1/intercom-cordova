@@ -253,6 +253,7 @@ public class IntercomBridge extends CordovaPlugin {
         registerForPush {
             @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
                 //This doesn't need to do anything on Android
+                callbackContext.success();
             }
         },
         sendPushTokenToIntercom {
@@ -260,6 +261,7 @@ public class IntercomBridge extends CordovaPlugin {
                 String token = args.optString(0);
                 IntercomPushClient intercomPushClient = new IntercomPushClient();
                 intercomPushClient.sendTokenToIntercom(cordova.getActivity().getApplication(), token);
+                callbackContext.success();
             }
         },
         displayCarousel {
