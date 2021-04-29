@@ -78,7 +78,9 @@ public class IntercomBridge extends CordovaPlugin {
             String apiKey = preferences.getString("intercom-android-api-key", "");
             String appId = preferences.getString("intercom-app-id", "");
 
-            Intercom.initialize(cordova.getActivity().getApplication(), apiKey, appId);
+            if (apiKey != null && apiKey.length() > 0 && appId != null && appId.length() > 0) {
+              Intercom.initialize(cordova.getActivity().getApplication(), apiKey, appId);
+            }
         } catch (Exception e) {
             Log.e("Intercom-Cordova", "ERROR: Something went wrong when initializing Intercom. Have you set your APP_ID and ANDROID_API_KEY?", e);
         }
@@ -135,6 +137,14 @@ public class IntercomBridge extends CordovaPlugin {
         logout {
             @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
                 Intercom.client().logout();
+                callbackContext.success();
+            }
+        },
+        setApiKeyForAppId {
+            @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+                String apiKey = args.optString(0);
+                String appId = args.optString(1);
+                Intercom.initialize(cordova.getActivity().getApplication(), apiKey, appId);
                 callbackContext.success();
             }
         },

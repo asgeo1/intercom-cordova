@@ -19,6 +19,10 @@ var intercom = {
         cordova.exec(success, error, 'Intercom', 'setSecureMode', [secureHash, secureData]);
     },
 
+    setApiKeyForAppId: function(apiKey, appId, success, error) {
+        cordova.exec(success, error, 'Intercom', 'setApiKeyForAppId', [apiKey, appId]);
+    },
+
     setUserHash: function(secureHash, success, error) {
         cordova.exec(success, error, 'Intercom', 'setUserHash', [secureHash]);
     },
